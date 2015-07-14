@@ -6,9 +6,11 @@ use Teamwork\Teamwork;
 
 $teamwork = new Teamwork();
 
-/*
- * projects
- */
+$since_timestamp = strtotime('last monday');
+
+$referral_link = 'http://murr.ie/9dD';
+
+$messages_array = array();
 
 $existing_project_ids = $teamwork->read_projects_cache();
 
@@ -20,24 +22,29 @@ $teamwork->save_projects_cache($latest_project_ids);
 
 $new_project_ids = $teamwork->determine_difference($latest_project_ids, $existing_project_ids);
 
-$archived_project_ids = $teamwork->determine_difference($existing_project_ids, $latest_project_ids);
+$completed_project_ids = $teamwork->determine_difference($existing_project_ids, $latest_project_ids);
 
-echo count($new_project_ids) . " new projects. ";
+$completed_task_ids = $teamwork->compile_tasks($since_timestamp, 'completed', 'completed_on');
 
-echo count($archived_project_ids) . " completed projects. ";
-
-
-/*
- * tasks
- */
-
-// get a list of all tasks?
-
-// compare to a list of existing local tasks
-
-// determine number of closed tasks?
-
-// determine number of created tasks?
+$new_task_ids = $teamwork->compile_tasks($since_timestamp, null, 'created-on');
 
 
-echo 'done';
+$messages_array[] = count($new_project_ids) > 0 ? count($new_project_ids) . " new projects" : '';
+
+$messages_array[] = count($completed_project_ids) > 0 ? count($completed_project_ids) . " completed projects" : '';
+
+$messages_array[] = count($new_task_ids) > 0 ? count($new_task_ids) . " new tasks" : '';
+
+$messages_array[] = count($completed_task_ids) > 0 ? count($completed_task_ids) . " completed tasks" : '';
+
+$messages_array = array_filter($messages_array);
+
+if (!empty($messages_array)) {
+    $tweet = implode(", ", $messages_array);
+}
+
+echo $tweet . ' this week at Murrion. All organised using @teamwork ' . $referral_link . "<br />\n";
+
+
+echo strlen($tweet);
+
