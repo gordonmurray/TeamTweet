@@ -137,15 +137,18 @@ class teamwork
     /**
      * Given some project and task arrays, compile some text to use in a Tweet
      *
-     * @param $new_project_ids
-     * @param $complete_project_ids
-     * @param $new_task_ids
-     * @param $complete_task_ids
+     * @param $parameters
      * @param $settings_array
      * @return string
      */
-    public function tweet_compile_text($new_project_ids, $complete_project_ids, $new_task_ids, $complete_task_ids, $settings_array)
+    public function tweet_compile_text($parameters, $settings_array)
     {
+        $tweet = '';
+        $new_project_ids = $parameters['new_project_ids'];
+        $complete_project_ids = $parameters['complete_project_ids'];
+        $new_task_ids = $parameters['new_task_ids'];
+        $complete_task_ids = $parameters['complete_task_ids'];
+
         $messages_array[] = count($new_project_ids) > 0 ? count($new_project_ids) . " new projects" : '';
 
         $messages_array[] = count($complete_project_ids) > 0 ? count($complete_project_ids) . " completed projects" : '';
@@ -158,9 +161,8 @@ class teamwork
 
         if (!empty($messages_array)) {
             $tweet = implode(", ", $messages_array);
+            $tweet .= ' this week at ' . $settings_array['business_name'] . '. Organised using @teamwork ' . $settings_array['teamwork_referral_link'];
         }
-
-        $tweet .= ' this week at ' . $settings_array['business_name'] . '. Organised using @teamwork ' . $settings_array['teamwork_referral_link'];
 
         return $tweet;
 

@@ -27,6 +27,13 @@ $complete_task_ids = $teamwork->tasks_compile($since_timestamp, 'completed', 'co
 
 $new_task_ids = $teamwork->tasks_compile($since_timestamp, null, 'created-on', $settings_array);
 
-$tweet = $teamwork->tweet_compile_text($new_project_ids, $complete_project_ids, $new_task_ids, $complete_task_ids, $settings_array);
+$parameters = array(
+    'new_project_ids' => $new_project_ids,
+    'complete_project_ids' => $complete_project_ids,
+    'new_task_ids' => $new_task_ids,
+    'complete_task_ids' => $complete_task_ids
+);
+
+$tweet = $teamwork->tweet_compile_text($parameters, $settings_array);
 
 echo $tweet;
