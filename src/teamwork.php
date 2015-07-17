@@ -9,33 +9,33 @@ class teamwork
      * Perform a GET to Teamwork's API
      *
      * @param string $endpoint
-     * @param array $parameters
+     * @param array $params
      * @param $settings_array
      * @return mixed
      */
-    public function get($endpoint = 'projects', $parameters = array(), $settings_array)
+    public function get($endpoint = 'projects', $params = array(), $settings_array)
     {
-        $additional_parameters = '?';
-        $additional_parameters_array = array();
+        $parameters = '?';
+        $parameters_array = array();
 
-        if (!empty($parameters)) {
-            foreach ($parameters as $key => $value) {
-                $additional_parameters_array[] = "$key=$value";
+        if (!empty($params)) {
+            foreach ($params as $key => $value) {
+                $parameters_array[] = "$key=$value";
             }
         }
 
-        $additional_parameters .= implode("&", $additional_parameters_array);
+        $parameters .= implode("&", $parameters_array);
 
-        $url = $settings_array['teamwork_url'] . $endpoint . '.json' . $additional_parameters;
+        $url = $settings_array['teamwork_url'] . $endpoint . '.json' . $parameters;
 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array("authorization: Basic " . $settings_array['teamwork_api_key']));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
-        $data = curl_exec($ch);
-        curl_close($ch);
+        $channel = curl_init();
+        curl_setopt($channel, CURLOPT_URL, $url);
+        curl_setopt($channel, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+        curl_setopt($channel, CURLOPT_HTTPHEADER, array("authorization: Basic " . $settings_array['teamwork_api_key']));
+        curl_setopt($channel, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($channel, CURLOPT_CONNECTTIMEOUT, 5);
+        $data = curl_exec($channel);
+        curl_close($channel);
 
         return json_decode($data, true);
     }
