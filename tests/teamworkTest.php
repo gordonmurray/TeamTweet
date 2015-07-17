@@ -39,11 +39,15 @@ class teamworkTest extends PHPUnit_Framework_TestCase
         $completed_project_ids = [1, 2, 3];
         $new_task_ids = [45, 46, 47];
         $completed_task_ids = [23, 24, 25];
-        $referral_link = 'http://murr.ie/9dD';
 
-        $tweet = $teamwork->tweet_compile_text($new_project_ids, $completed_project_ids, $new_task_ids, $completed_task_ids, $referral_link);
+        $settings_array = array(
+            'teamwork_referral_link' => 'http://teamwork.com',
+            'business_name' => 'TESTING'
+        );
 
-        $this->assertEquals($tweet, '3 new projects, 3 completed projects, 3 new tasks, 3 completed tasks this week at Murrion. Organised using @teamwork http://murr.ie/9dD');
+        $tweet = $teamwork->tweet_compile_text($new_project_ids, $completed_project_ids, $new_task_ids, $completed_task_ids, $settings_array);
+
+        $this->assertEquals($tweet, '3 new projects, 3 completed projects, 3 new tasks, 3 completed tasks this week at TESTING. Organised using @teamwork http://teamwork.com');
     }
 
     public function testProjectsSaveCache()
@@ -86,7 +90,7 @@ class teamworkTest extends PHPUnit_Framework_TestCase
                 array(
                     'name' => 'sample task 2',
                     'id' => 6,
-                    'created-on' => date("Y-m-d h:i:s", strtotime('-40 minutes'))
+                    'created-on' => date("Y-m-d h:i:s", strtotime('-50 minutes'))
                 ),
                 array(
                     'name' => 'sample task 3',
