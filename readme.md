@@ -1,5 +1,6 @@
 [![Code Climate](https://codeclimate.com/github/murrion/TeamTweet/badges/gpa.svg)](https://codeclimate.com/github/murrion/TeamTweet)
 [![Test Coverage](https://codeclimate.com/github/murrion/TeamTweet/badges/coverage.svg)](https://codeclimate.com/github/murrion/TeamTweet/coverage)
+[![Build Status](https://travis-ci.org/murrion/TeamTweet.svg?branch=master)](https://travis-ci.org/murrion/TeamTweet)
 
 Teamwork Tweet
 ==============
