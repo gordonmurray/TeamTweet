@@ -1,3 +1,6 @@
+[![Code Climate](https://codeclimate.com/github/murrion/TeamTweet/badges/gpa.svg)](https://codeclimate.com/github/murrion/TeamTweet)
+[![Test Coverage](https://codeclimate.com/github/murrion/TeamTweet/badges/coverage.svg)](https://codeclimate.com/github/murrion/TeamTweet/coverage)
+
 Teamwork Tweet
 ==============
 
@@ -12,6 +15,3 @@ Installation
 
 * Rename settings_dist.ini to settings.ini
 * Update settings.ini with your own Teamwork URL, API Key, referral link and business name
-
-[![Code Climate](https://codeclimate.com/github/murrion/TeamTweet/badges/gpa.svg)](https://codeclimate.com/github/murrion/TeamTweet)
-[![Test Coverage](https://codeclimate.com/github/murrion/TeamTweet/badges/coverage.svg)](https://codeclimate.com/github/murrion/TeamTweet/coverage)
