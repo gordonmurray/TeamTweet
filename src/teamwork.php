@@ -1,8 +1,8 @@
 <?php
 
-namespace Teamwork;
+namespace teamwork;
 
-class Teamwork
+class teamwork
 {
 
     /**
@@ -30,7 +30,7 @@ class Teamwork
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array("authorization: Basic APIKEY"));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array("authorization: Basic XXXXXXXXXXXXXXX"));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
         $data = curl_exec($ch);
@@ -45,7 +45,7 @@ class Teamwork
      * @param $projects_array
      * @return array
      */
-    public function parse_project_ids($projects_array)
+    public function projects_parse_ids($projects_array)
     {
         $project_ids = array();
 
@@ -63,40 +63,28 @@ class Teamwork
      * Save a local cache of Project IDs
      *
      * @param $project_ids
+     * @param string $file_name
      */
-    public function save_projects_cache($project_ids)
+    public function projects_save_cache($project_ids, $file_name = 'project_ids')
     {
         if (is_array($project_ids) && !empty($project_ids)) {
-            file_put_contents('cache/project_ids.json', json_encode($project_ids));
+            file_put_contents('cache/' . $file_name . '.json', json_encode($project_ids));
         }
     }
 
     /**
      * Return an array of cached project IDs, if any
      *
+     * @param string $file_name
      * @return array|mixed
      */
-    public function read_projects_cache()
+    public function projects_read_cache($file_name = 'project_ids')
     {
         if (file_exists('cache/project_ids.json')) {
-            return json_decode(file_get_contents('cache/project_ids.json'), true);
+            return json_decode(file_get_contents('cache/' . $file_name . '.json'), true);
         } else {
             return array();
         }
-    }
-
-    /**
-     * Given 2 arrays, return the difference
-     *
-     * @param $array1
-     * @param $array2
-     * @return array
-     */
-    public function determine_difference($array1, $array2)
-    {
-        $difference = array_diff($array1, $array2);
-
-        return $difference;
     }
 
     /**
@@ -107,7 +95,7 @@ class Teamwork
      * @param string $filter_key
      * @return array
      */
-    public function compile_tasks($since_timestamp = '', $filter = '', $filter_key = '')
+    public function tasks_compile($since_timestamp = '', $filter = '', $filter_key = '')
     {
         $parameters = array(
             'pageSize' => 250,
@@ -117,7 +105,7 @@ class Teamwork
 
         $tasks_array = $this->get('tasks', $parameters);
 
-        $filtered_tasks = $this->filter_tasks($tasks_array, $since_timestamp, $filter_key);
+        $filtered_tasks = $this->tasks_filter($tasks_array, $since_timestamp, $filter_key);
 
         return $filtered_tasks;
     }
@@ -130,7 +118,7 @@ class Teamwork
      * @param $array_key
      * @return array
      */
-    public function filter_tasks($tasks_array, $since_timestamp, $array_key)
+    public function tasks_filter($tasks_array, $since_timestamp, $array_key)
     {
         $filtered_tasks = array();
 
@@ -141,5 +129,37 @@ class Teamwork
         }
 
         return $filtered_tasks;
+    }
+
+    /**
+     * Given some project and task arrays, compile some text to use in a Tweet
+     *
+     * @param $new_project_ids
+     * @param $completed_project_ids
+     * @param $new_task_ids
+     * @param $completed_task_ids
+     * @param $referral_link
+     * @return string
+     */
+    public function tweet_compile_text($new_project_ids, $completed_project_ids, $new_task_ids, $completed_task_ids, $referral_link)
+    {
+        $messages_array[] = count($new_project_ids) > 0 ? count($new_project_ids) . " new projects" : '';
+
+        $messages_array[] = count($completed_project_ids) > 0 ? count($completed_project_ids) . " completed projects" : '';
+
+        $messages_array[] = count($new_task_ids) > 0 ? count($new_task_ids) . " new tasks" : '';
+
+        $messages_array[] = count($completed_task_ids) > 0 ? count($completed_task_ids) . " completed tasks" : '';
+
+        $messages_array = array_filter($messages_array);
+
+        if (!empty($messages_array)) {
+            $tweet = implode(", ", $messages_array);
+        }
+
+        $tweet .= ' this week at Murrion. Organised using @teamwork ' . $referral_link;
+
+        return $tweet;
+
     }
 }

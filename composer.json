@@ -1,7 +1,15 @@
 {
-  "autoload": {
-    "psr-0": {
-      "Teamwork": "src/"
+  "name": "murrion/teamtweet",
+  "description": "Check for changes in projects and Tasks in the current week and Tweet some stats",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Gordon Murray",
+      "email": "projects@murron.com"
     }
+  ],
+  "autoload": {
+    "psr-4": {"teamwork\\": "src/"}
   }
 }
