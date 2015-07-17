@@ -125,6 +125,7 @@ class teamwork
         $filtered_tasks = array();
 
         foreach ($tasks_array['todo-items'] as $task_details) {
+
             if (strtotime($task_details[$array_key]) >= $since_timestamp) {
                 $filtered_tasks[] = $task_details['id'];
             }

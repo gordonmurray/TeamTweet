@@ -80,29 +80,32 @@ class teamworkTest extends PHPUnit_Framework_TestCase
     {
         $teamwork = new teamwork();
 
+        $mock_since_timestamp = strtotime('2015-01-01 08:00:00');
+
         $mock_tasks_array = array(
             'todo-items' => array(
                 array(
                     'name' => 'sample task 1',
                     'id' => 5,
-                    'created-on' => date("Y-m-d h:i:s", strtotime('-90 minutes'))
+                    'created-on' => date("Y-m-d h:i:s", $mock_since_timestamp - 3600)
                 ),
                 array(
                     'name' => 'sample task 2',
                     'id' => 6,
-                    'created-on' => date("Y-m-d h:i:s", strtotime('-50 minutes'))
+                    'created-on' => date("Y-m-d h:i:s", $mock_since_timestamp + 1800)
                 ),
                 array(
                     'name' => 'sample task 3',
                     'id' => 7,
-                    'created-on' => date("Y-m-d h:i:s", strtotime('-30 minutes'))
+                    'created-on' => date("Y-m-d h:i:s", $mock_since_timestamp + 7500)
                 ),
             ),
         );
 
-        $since_timestamp = strtotime('-1 hour');
 
-        $new_task_ids = $teamwork->tasks_filter($mock_tasks_array, $since_timestamp, 'created-on');
+        $new_task_ids = $teamwork->tasks_filter($mock_tasks_array, $mock_since_timestamp, 'created-on');
+
+        print_r($new_task_ids);
 
         $this->assertNotContains(5, $new_task_ids);
         $this->assertContains(6, $new_task_ids);
