@@ -10,29 +10,30 @@ class teamwork
      *
      * @param string $endpoint
      * @param array $parameters
+     * @param $settings_array
      * @return mixed
      */
-    public function get($endpoint = 'projects', $parameters = array())
+    public function get($endpoint = 'projects', $parameters = array(), $settings_array)
     {
-        $timeout = 5;
-
         $additional_parameters = '?';
         $additional_parameters_array = array();
 
-        foreach ($parameters as $key => $value) {
-            $additional_parameters_array[] = "$key=$value";
+        if (!empty($parameters)) {
+            foreach ($parameters as $key => $value) {
+                $additional_parameters_array[] = "$key=$value";
+            }
         }
 
         $additional_parameters .= implode("&", $additional_parameters_array);
 
-        $url = 'projects.murrion.com/' . $endpoint . '.json' . $additional_parameters;
+        $url = $settings_array['teamwork_url'] . $endpoint . '.json' . $additional_parameters;
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array("authorization: Basic XXXXXXXXXXXXXXX"));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array("authorization: Basic " . $settings_array['teamwork_api_key']));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
         $data = curl_exec($ch);
         curl_close($ch);
 
@@ -93,9 +94,10 @@ class teamwork
      * @param string $since_timestamp
      * @param string $filter
      * @param string $filter_key
+     * @param $settings_array
      * @return array
      */
-    public function tasks_compile($since_timestamp = '', $filter = '', $filter_key = '')
+    public function tasks_compile($since_timestamp = '', $filter = '', $filter_key = '', $settings_array)
     {
         $parameters = array(
             'pageSize' => 250,
@@ -103,7 +105,7 @@ class teamwork
             'filter' => $filter
         );
 
-        $tasks_array = $this->get('tasks', $parameters);
+        $tasks_array = $this->get('tasks', $parameters, $settings_array);
 
         $filtered_tasks = $this->tasks_filter($tasks_array, $since_timestamp, $filter_key);
 
@@ -138,10 +140,10 @@ class teamwork
      * @param $completed_project_ids
      * @param $new_task_ids
      * @param $completed_task_ids
-     * @param $referral_link
+     * @param $settings_array
      * @return string
      */
-    public function tweet_compile_text($new_project_ids, $completed_project_ids, $new_task_ids, $completed_task_ids, $referral_link)
+    public function tweet_compile_text($new_project_ids, $completed_project_ids, $new_task_ids, $completed_task_ids, $settings_array)
     {
         $messages_array[] = count($new_project_ids) > 0 ? count($new_project_ids) . " new projects" : '';
 
@@ -157,7 +159,7 @@ class teamwork
             $tweet = implode(", ", $messages_array);
         }
 
-        $tweet .= ' this week at Murrion. Organised using @teamwork ' . $referral_link;
+        $tweet .= ' this week at ' . $settings_array['business_name'] . '. Organised using @teamwork ' . $settings_array['teamwork_referral_link'];
 
         return $tweet;
 

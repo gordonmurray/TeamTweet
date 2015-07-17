@@ -3,3 +3,4 @@
 composer.phar
 phpunit.phar
 /cache/*
+settings.ini
