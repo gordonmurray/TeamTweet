@@ -2,5 +2,5 @@
 /vendor
 composer.phar
 phpunit.phar
-/cache/*
+/cache/project_ids.json
 settings.ini
