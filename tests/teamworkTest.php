@@ -35,10 +35,10 @@ class teamworkTest extends PHPUnit_Framework_TestCase
     {
         $teamwork = new teamwork();
 
-        $new_project_ids = [5, 6, 7];
-        $completed_project_ids = [1, 2, 3];
-        $new_task_ids = [45, 46, 47];
-        $completed_task_ids = [23, 24, 25];
+        $new_project_ids = array(5, 6, 7);
+        $completed_project_ids = array(1, 2, 3);
+        $new_task_ids = array(45, 46, 47);
+        $completed_task_ids = array(23, 24, 25);
 
         $settings_array = array(
             'teamwork_referral_link' => 'http://teamwork.com',
@@ -54,7 +54,7 @@ class teamworkTest extends PHPUnit_Framework_TestCase
     {
         $teamwork = new teamwork();
 
-        $project_ids = [1, 2, 3];
+        $project_ids = array(1, 2, 3);
         $file_name = 'testfile';
 
         $teamwork->projects_save_cache($project_ids, $file_name);
@@ -64,7 +64,7 @@ class teamworkTest extends PHPUnit_Framework_TestCase
     {
         $teamwork = new teamwork();
 
-        $project_ids = [1, 2, 3];
+        $project_ids = array(1, 2, 3);
         $file_name = 'testfile';
 
         $teamwork->projects_save_cache($project_ids, $file_name);
@@ -104,8 +104,6 @@ class teamworkTest extends PHPUnit_Framework_TestCase
 
 
         $new_task_ids = $teamwork->tasks_filter($mock_tasks_array, $mock_since_timestamp, 'created-on');
-
-        print_r($new_task_ids);
 
         $this->assertNotContains(5, $new_task_ids);
         $this->assertContains(6, $new_task_ids);
