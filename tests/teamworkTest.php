@@ -71,6 +71,8 @@ class teamworkTest extends PHPUnit_Framework_TestCase
 
         $existing_project_ids = $teamwork->projects_read_cache($file_name);
 
+        print_r($existing_project_ids);
+
         $this->assertContains(1, $existing_project_ids);
         $this->assertContains(2, $existing_project_ids);
         $this->assertContains(3, $existing_project_ids);
