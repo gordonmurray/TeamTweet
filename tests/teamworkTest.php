@@ -36,16 +36,16 @@ class teamworkTest extends PHPUnit_Framework_TestCase
         $teamwork = new teamwork();
 
         $new_project_ids = array(5, 6, 7);
-        $completed_project_ids = array(1, 2, 3);
+        $complete_project_ids = array(1, 2, 3);
         $new_task_ids = array(45, 46, 47);
-        $completed_task_ids = array(23, 24, 25);
+        $complete_task_ids = array(23, 24, 25);
 
         $settings_array = array(
             'teamwork_referral_link' => 'http://teamwork.com',
             'business_name' => 'TESTING'
         );
 
-        $tweet = $teamwork->tweet_compile_text($new_project_ids, $completed_project_ids, $new_task_ids, $completed_task_ids, $settings_array);
+        $tweet = $teamwork->tweet_compile_text($new_project_ids, $complete_project_ids, $new_task_ids, $complete_task_ids, $settings_array);
 
         $this->assertEquals($tweet, '3 new projects, 3 completed projects, 3 new tasks, 3 completed tasks this week at TESTING. Organised using @teamwork http://teamwork.com');
     }

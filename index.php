@@ -21,12 +21,12 @@ $teamwork->projects_save_cache($latest_project_ids);
 
 $new_project_ids = array_diff($latest_project_ids, $existing_project_ids);
 
-$completed_project_ids = array_diff($existing_project_ids, $latest_project_ids);
+$complete_project_ids = array_diff($existing_project_ids, $latest_project_ids);
 
-$completed_task_ids = $teamwork->tasks_compile($since_timestamp, 'completed', 'completed_on', $settings_array);
+$complete_task_ids = $teamwork->tasks_compile($since_timestamp, 'completed', 'completed_on', $settings_array);
 
 $new_task_ids = $teamwork->tasks_compile($since_timestamp, null, 'created-on', $settings_array);
 
-$tweet = $teamwork->tweet_compile_text($new_project_ids, $completed_project_ids, $new_task_ids, $completed_task_ids, $settings_array);
+$tweet = $teamwork->tweet_compile_text($new_project_ids, $complete_project_ids, $new_task_ids, $complete_task_ids, $settings_array);
 
 echo $tweet;

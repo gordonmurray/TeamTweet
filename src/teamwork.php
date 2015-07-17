@@ -138,21 +138,21 @@ class teamwork
      * Given some project and task arrays, compile some text to use in a Tweet
      *
      * @param $new_project_ids
-     * @param $completed_project_ids
+     * @param $complete_project_ids
      * @param $new_task_ids
-     * @param $completed_task_ids
+     * @param $complete_task_ids
      * @param $settings_array
      * @return string
      */
-    public function tweet_compile_text($new_project_ids, $completed_project_ids, $new_task_ids, $completed_task_ids, $settings_array)
+    public function tweet_compile_text($new_project_ids, $complete_project_ids, $new_task_ids, $complete_task_ids, $settings_array)
     {
         $messages_array[] = count($new_project_ids) > 0 ? count($new_project_ids) . " new projects" : '';
 
-        $messages_array[] = count($completed_project_ids) > 0 ? count($completed_project_ids) . " completed projects" : '';
+        $messages_array[] = count($complete_project_ids) > 0 ? count($complete_project_ids) . " completed projects" : '';
 
         $messages_array[] = count($new_task_ids) > 0 ? count($new_task_ids) . " new tasks" : '';
 
-        $messages_array[] = count($completed_task_ids) > 0 ? count($completed_task_ids) . " completed tasks" : '';
+        $messages_array[] = count($complete_task_ids) > 0 ? count($complete_task_ids) . " completed tasks" : '';
 
         $messages_array = array_filter($messages_array);
 
