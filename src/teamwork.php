@@ -69,7 +69,7 @@ class teamwork
     public function projects_save_cache($project_ids, $file_name = 'project_ids')
     {
         if (is_array($project_ids) && !empty($project_ids)) {
-            file_put_contents('./cache/' . $file_name . '.json', json_encode($project_ids));
+            file_put_contents(__DIR__ . '/../cache/' . $file_name . '.json', json_encode($project_ids));
         }
     }
 
@@ -81,8 +81,8 @@ class teamwork
      */
     public function projects_read_cache($file_name = 'project_ids')
     {
-        if (file_exists('./cache/project_ids.json')) {
-            return json_decode(file_get_contents('./cache/' . $file_name . '.json'), true);
+        if (file_exists(__DIR__ . '/../cache/project_ids.json')) {
+            return json_decode(file_get_contents(__DIR__ . '/../cache/' . $file_name . '.json'), true);
         } else {
             return array();
         }
