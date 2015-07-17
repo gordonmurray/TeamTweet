@@ -1,8 +1,7 @@
 {
   "name": "murrion/teamtweet",
-  "description": "Check for changes in projects and Tasks in the current week and Tweet some stats",
+  "description": "Check for changes in Projects and Tasks on Teamwork.com in the current week and return some stats",
   "minimum-stability": "stable",
-  "license": "proprietary",
   "authors": [
     {
       "name": "Gordon Murray",
