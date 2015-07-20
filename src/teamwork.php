@@ -81,7 +81,7 @@ class teamwork
      */
     public function projects_read_cache($file_name = 'project_ids')
     {
-        if (file_exists(__DIR__ . '/../cache/project_ids.json')) {
+        if (file_exists(__DIR__ . '/../cache/' . $file_name . '.json')) {
             return json_decode(file_get_contents(__DIR__ . '/../cache/' . $file_name . '.json'), true);
         } else {
             return array();
