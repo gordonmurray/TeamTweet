@@ -1,0 +1,24 @@
+HTTP/1.1 200 OK
+Access-Control-Allow-Origin: projects.murrion.com
+Content-Type: application/json;charset=utf-8
+Date: Tue, 21 Jul 2015 14:36:46 GMT
+ETag: 1437483712186-43244,""
+Golang-Api-Version: r0.5.5
+P3P: CP="Teamwork does not have a P3P policy"
+Set-Cookie: REVEL_FLASH=; Path=/
+Set-Cookie: REVEL_SESSION=ae37a025fce8498030e492da37effab86b51c5c3-%00_ID%3A0d90702380b81645d6b929e6f32fc5c95db7d854dfd474053ed9908712434128%00%00_TS%3A1440081406%00; Path=/; Expires=Thu, 20 Aug 2015 14:36:46 UTC
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+X-Lastupdated: 2015-07-21T14:36:46Z
+X-Page: 1
+X-Pages: 1
+X-Powered-By: ARR/2.5
+X-Powered-By: ASP.NET
+X-Ratelimit-Limit: 250
+X-Ratelimit-Remaining: 248
+X-Records: 1
+X-Xss-Protection: 1; mode=block
+Connection: keep-alive
+Transfer-Encoding: chunked
+
+{"STATUS":"OK","todo-item":{"id":3488853,"canComplete":true,"comments-count":2,"description":"Include \"[3488853]\" or \"[Finish(ed) 3488853]\" to update this task when making a commit. Record time spent on the task by using: \"[3488853:30]\"\r\n\r\nInclude \"[3488853]\" or \"[Finish(ed) 3488853]\" to update this task when making a commit. Record time spent on the task by using: \"[3488853:30]\"","has-reminders":false,"has-unread-comments":false,"private":0,"content":"Sample task","order":2008,"project-id":40881,"project-name":"Murrion Software","todo-list-id":280483,"todo-list-name":"My Inbox","tasklist-private":false,"status":"new","company-name":"Murrion Software Limited","company-id":21976,"creator-id":43244,"creator-firstname":"Gordon","creator-lastname":"Murray","completed":false,"start-date":"","due-date-base":"","due-date":"","created-on":"2015-06-04T21:48:24Z","last-changed-on":"2015-06-07T15:21:33Z","position":2008,"estimated-minutes":0,"priority":"","progress":0,"harvest-enabled":false,"parentTaskId":"","lockdownId":"","tasklist-lockdownId":"","has-dependencies":0,"has-predecessors":0,"hasTickets":false,"timeIsLogged":"","attachments-count":0,"predecessors":[],"parent-task":{},"canEdit":true,"viewEstimatedTime":true,"creator-avatar-url":"http://tw-webserver2.teamworkpm.net/sites/murrion/images/users/45f86b28c5d8846792173421b23c396d%2Ejpg","canLogTime":true,"commentFollowerSummary":"Gordon M.","commentFollowerIds":"43244","userFollowingComments":true,"userFollowingChanges":false}}
