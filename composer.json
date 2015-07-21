@@ -10,5 +10,8 @@
   ],
   "autoload": {
     "psr-4": {"teamwork\\": "src/"}
+  },
+  "require": {
+    "dg/twitter-php": "v3.5"
   }
 }
