@@ -112,11 +112,6 @@ class teamworkTest extends PHPUnit_Framework_TestCase
         $this->assertContains(7, $new_task_ids);
     }
 
-    public function testSettingsExist()
-    {
-        $this->assertFileExists('settings.ini');
-    }
-
     public function testSettingsDistExist()
     {
         $this->assertFileExists('settings_dist.ini');
